@@ -1,0 +1,39 @@
+.pokemons-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .pokemon-item {
+    width: 60%;
+    display: block;
+    transition: 0.3s;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px rgb(79, 79, 79);
+    background: #e0e0e0;
+    padding: 8px 16px;
+    margin: 8px;
+    font-size: 20px;
+
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+  }
+  .pokemon-item:hover {
+    transform: translate(-20px);
+    transition: 0.3s;
+  }
+}
+
+.filter-block {
+  display: flex;
+  justify-content: center;
+  input,
+  .pokemon-type {
+    width: 30%;
+    margin: 10px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: 2px solid rgb(79, 79, 79);
+    outline: none;
+  }
+}

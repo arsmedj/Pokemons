@@ -1,0 +1,119 @@
+.profile-container {
+  .profile-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 16px 32px;
+    span {
+      font-size: 32px;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+      border: 2px solid black;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 5px 5px 5px rgb(71, 71, 71);
+    }
+  }
+  .profile-info {
+    .react-tabs__tab-list {
+      list-style-type: none;
+      display: flex;
+      margin-bottom: 0;
+    }
+    .react-tabs__tab {
+      display: inline-block;
+      border: 1px solid transparent;
+      border-bottom: none;
+      bottom: -1px;
+      position: relative;
+      list-style: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      outline: none;
+    }
+    .react-tabs__tab--selected {
+      border-top: 3px solid rgb(39, 39, 39);
+      border-right: 3px solid rgb(39, 39, 39);
+      border-left: 3px solid rgb(39, 39, 39);
+      border-bottom: 1px solid darkgray;
+      border-radius: 10px 10px 0 0;
+    }
+    .react-tabs__tab-panel--selected {
+      border-top: 1px solid rgb(39, 39, 39);
+    }
+    .carousel-slider {
+      display: flex;
+    }
+    .slider-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+    .prevBtn,
+    .nextBtn {
+      padding: 8px 16px;
+      font-weight: bold;
+      font-size: 24px;
+      background-color: rgb(155, 155, 155);
+      color: #fff;
+    }
+    .nextBtn {
+      border-radius: 10px 0 0 10px;
+    }
+    .prevBtn {
+      border-radius: 0 10px 10px 0;
+    }
+    .pokemonImg {
+      display: flex;
+      justify-content: center;
+      height: 300px;
+      img {
+        width: 250px;
+        height: 250px;
+        display: block;
+      }
+    }
+    .stats-container {
+      padding-left: 32px;
+      padding-top: 24px;
+      .stat-item {
+        display: flex;
+        align-items: center;
+        .stat-icon {
+          font-size: 40px;
+          margin: 10px;
+        }
+        .stat-value {
+          font-size: 30px;
+          font-weight: bold;
+          .hard {
+            color: green;
+          }
+          .middle {
+            color: rgb(255, 220, 44);
+          }
+          .low {
+            color: red;
+          }
+        }
+      }
+    }
+    .moves-container {
+      padding-left: 32px;
+      padding-top: 24px;
+      .moves-list {
+        .move-item {
+          font-size: 24px;
+        }
+      }
+      table {
+        td {
+          border: 1px solid black;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
