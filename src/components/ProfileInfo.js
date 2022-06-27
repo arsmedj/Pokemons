@@ -9,7 +9,7 @@ const ProfileInfo = ({ profile }) => {
 
   const getPokePhotos = (sourceObj, result) => {
     Object.keys(sourceObj).forEach((key) => {
-      if (key == "front_default") {
+      if (key === "front_default") {
         result.push(sourceObj[key]);
       }
       if (typeof sourceObj[key] == "object" && sourceObj[key] !== null) {
@@ -68,7 +68,7 @@ const ProfileInfo = ({ profile }) => {
             >
               {getPokePhotos(sprites, []).map((img, idx) => (
                 <div className="pokemonImg" key={idx}>
-                  <img src={img} />
+                  <img src={img} alt="pokeImg" />
                 </div>
               ))}
             </Carousel>

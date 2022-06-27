@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 import PokemonsList from "../components/PokemonesList";
-import Filter from "../components/Filter";
+
 import usePagination from "../hooks/usePagination";
 import {
   requestPokemons,
@@ -11,9 +12,22 @@ import {
 } from "../redux/thunk/pokemons";
 import { CONTENT_PER_PAGE } from "../data";
 import ReactPaginate from "react-paginate";
+import Filter from "../components/Filter";
+import { RootState } from "../redux/store";
+import { IPokemonItem } from "../types";
 
-const PokemonsListLayout = () => {
-  const { items, types, loading, error } = useSelector(
+interface PokemonsListLayoutProps {
+  requestPokemons: () => void;
+  requestTypes: () => void;
+  requestPokemonsByType: (type: string) => void;
+}
+
+const PokemonsListLayout: React.FC<PokemonsListLayoutProps> = ({
+  requestPokemons,
+  requestTypes,
+  requestPokemonsByType,
+}) => {
+  const { items, types, loading, error } = useTypedSelector(
     (state) => state.pokemons
   );
   const [filter, setFilter] = useState("");
@@ -22,29 +36,24 @@ const PokemonsListLayout = () => {
     totalPages,
     items: list,
     handlePageClick,
-  } = usePagination({
-    contentPerPage: CONTENT_PER_PAGE,
-    filter,
-    items,
-  });
-
-  const dispatch = useDispatch();
+  } = usePagination<IPokemonItem>(CONTENT_PER_PAGE, items, filter);
 
   useEffect(() => {
-    dispatch(requestPokemons(""));
-    dispatch(requestTypes());
-  }, []);
+    requestPokemons();
+    requestTypes();
+  }, [requestPokemons, requestTypes]);
 
-  const handleChangeFilterName = ({ target: { value } }) => {
-    setFilter(value);
+  const handleChangeFilterName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.target.value);
     handlePageClick({ selected: 1 });
   };
 
-  const handleChangeFilterType = ({ target: { value } }) => {
+  const handleChangeFilterType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    let { value } = e.target;
     if (!value.includes("Choose type")) {
-      dispatch(requestPokemonsByType(value));
+      requestPokemonsByType(value);
     } else {
-      dispatch(requestPokemons());
+      requestPokemons();
     }
   };
 
@@ -64,7 +73,6 @@ const PokemonsListLayout = () => {
         pageRangeDisplayed={3}
         pageCount={totalPages}
         nextLabel="&rarr;"
-        renderOnZeroPageCount={null}
         disabledClassName="disabled"
         activeClassName="active"
         className="pagination"
@@ -77,5 +85,9 @@ const PokemonsListLayout = () => {
     </>
   );
 };
-
-export default PokemonsListLayout;
+const mapStateToProps = (state: RootState) => ({});
+export default connect(mapStateToProps, {
+  requestPokemons,
+  requestPokemonsByType,
+  requestTypes,
+})(PokemonsListLayout);

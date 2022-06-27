@@ -1,6 +1,13 @@
 import React from "react";
+import { IType } from "../types";
+interface FilterProps {
+  pokeName: string;
+  types: IType[];
+  onChangeFilterName: any;
+  onChangeFilterType: any;
+}
 
-const Filter = ({
+const Filter: React.FC<FilterProps> = ({
   pokeName,
   types,
   onChangeFilterName,
@@ -16,7 +23,7 @@ const Filter = ({
       />
       <select className="pokemon-type" onChange={onChangeFilterType}>
         <option>Choose type of pokemon</option>
-        {types.map((type, idx) => (
+        {types.map((type: IType, idx: number) => (
           <option value={type.name} key={idx}>
             {type.name}
           </option>

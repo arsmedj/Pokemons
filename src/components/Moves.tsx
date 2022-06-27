@@ -1,23 +1,26 @@
-import { useMemo, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { CONTENT_PER_PAGE } from "../data";
 import usePagination from "../hooks/usePagination";
+import { IMove } from "../types";
 
-const Moves = ({ moves }) => {
-  const { totalPages, items, handlePageClick } = usePagination({
-    contentPerPage: CONTENT_PER_PAGE,
-    count: moves.length,
-    items: moves,
-  });
+interface MovesProps {
+  moves: IMove[];
+}
+
+const Moves: React.FC<MovesProps> = ({ moves }) => {
+  const { totalPages, items, handlePageClick } = usePagination<IMove>(
+    CONTENT_PER_PAGE,
+    moves
+  );
 
   return (
     <div className="moves-container">
       <div className="moves-list">
         {items.length ? (
-          items.map((move, idx) => {
+          items.map((move: IMove, idx: number) => {
             return (
               <div className="move-item" key={idx}>
-                {move.move.name}
+                {move.move!.name}
               </div>
             );
           })
@@ -32,7 +35,6 @@ const Moves = ({ moves }) => {
         pageRangeDisplayed={3}
         pageCount={totalPages}
         nextLabel="&rarr;"
-        renderOnZeroPageCount={null}
         disabledClassName="disabled"
         activeClassName="active"
         className="pagination"
@@ -45,4 +47,5 @@ const Moves = ({ moves }) => {
     </div>
   );
 };
+
 export default Moves;

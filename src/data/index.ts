@@ -10,11 +10,10 @@ import { MdSpeed } from "react-icons/md";
 export const BASE_URL = "https://pokeapi.co/api/v2/";
 export const CONTENT_PER_PAGE = 12;
 
-export const STATS_ICONS = {
-  hp: <GiHearts />,
-  attack: <GiBroadsword />,
-  defense: <BsFillShieldSlashFill />,
-  specialattack: <GiCrossedAxes />,
-  specialdefense: <GiShieldReflect />,
-  speed: <MdSpeed />,
-};
+export const STATS_ICONS = new Map()
+  .set("hp", GiHearts)
+  .set("attack", GiBroadsword)
+  .set("defense", BsFillShieldSlashFill)
+  .set("special-attack", GiCrossedAxes)
+  .set("special-defense", GiShieldReflect)
+  .set("speed", MdSpeed);

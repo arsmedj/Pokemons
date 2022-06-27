@@ -1,6 +1,18 @@
 import React from "react";
+import { IPokemonItem } from "../types";
 import PokemonItem from "./PokemonItem";
-const PokemonsList = ({ items, loading, error }) => {
+
+interface PokemonsListProps {
+  items: IPokemonItem[];
+  loading: boolean;
+  error: string;
+}
+
+const PokemonsList: React.FC<PokemonsListProps> = ({
+  items,
+  loading,
+  error,
+}) => {
   if (loading) {
     return <h1>Loading...</h1>;
   }
@@ -9,7 +21,7 @@ const PokemonsList = ({ items, loading, error }) => {
   }
   return (
     <div className="pokemons-list">
-      {items.map((p, idx) => (
+      {items.map((p: IPokemonItem, idx: number) => (
         <PokemonItem pokemon={p} key={idx} />
       ))}
     </div>

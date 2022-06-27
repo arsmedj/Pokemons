@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { IPokemonItem } from "../types";
 import { ucFirst } from "../utils";
-
-const PokemonItem = ({ pokemon: { name } }) => {
+interface PokemonItemProps {
+  pokemon: IPokemonItem;
+}
+const PokemonItem: React.FC<PokemonItemProps> = ({ pokemon: { name } }) => {
   return (
     <Link className="pokemon-item" to={`/${name}`}>
       {ucFirst(name)}
